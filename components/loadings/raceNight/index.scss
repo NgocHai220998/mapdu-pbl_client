@@ -1,0 +1,126 @@
+.loading-container {
+  &__race {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    &-icon {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: suspension-race-night 1s linear infinite;
+    }
+    .loading-dot {
+      position: absolute;
+      top: 0%;
+      left: 0%;
+      display: block;
+      width: 100%;
+      height: 100%;
+      transform: rotate(calc(18deg * var(--i)));
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: calc(50% - 15px);
+        width: 12px;
+        height: 12px;
+        background: #eb9595;
+        border-radius: 9999px;
+        transform: scale(0);
+        animation: animate-loading-race 1s linear infinite;
+        animation-delay: calc(0.05s * var(--i));
+      }
+      &-0 {
+        --i: 0;
+      }
+      &-1 {
+        --i: 1;
+      }
+      &-2 {
+        --i: 2;
+      }
+      &-3 {
+        --i: 3;
+      }
+      &-4 {
+        --i: 4;
+      }
+      &-5 {
+        --i: 5;
+      }
+      &-6 {
+        --i: 6;
+      }
+      &-7 {
+        --i: 7;
+      }
+      &-8 {
+        --i: 8;
+      }
+      &-9 {
+        --i: 9;
+      }
+      &-10 {
+        --i: 10;
+      }
+      &-11 {
+        --i: 11;
+      }
+      &-12 {
+        --i: 12;
+      }
+      &-13 {
+        --i: 13;
+      }
+      &-14 {
+        --i: 14;
+      }
+      &-15 {
+        --i: 15;
+      }
+      &-16 {
+        --i: 16;
+      }
+      &-17 {
+        --i: 17;
+      }
+      &-18 {
+        --i: 18;
+      }
+      &-19 {
+        --i: 19;
+      }
+      &-20 {
+        --i: 20;
+      }
+    }
+    @keyframes animate-loading-race {
+      0% {
+        transform: scale(0);
+      }
+      10% {
+        transform: scale(1.2);
+      }
+      80%,
+      100% {
+        transform: scale(0);
+      }
+    }
+    @keyframes suspension-race-night {
+      100% {
+        transform: translate(-50%, calc(-50% - 1px));
+      }
+      50% {
+        transform: translate(-50%, calc(-50% + 2px));
+      }
+      0% {
+        transform: translate(-50%, calc(-50% - 1px));
+      }
+    }
+  }
+}

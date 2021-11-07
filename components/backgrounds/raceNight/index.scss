@@ -1,0 +1,47 @@
+.bg-race-night-container {
+  position: fixed;
+  left: 0;
+  top: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  background-image: url('/static/images/img_1.png');
+  background-size: cover;
+  background-position: center;
+  overflow: hidden;
+  z-index: -1;
+  &__surface {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    display: block;
+    height: 165px;
+    width: 500%;
+    background-image: url('/static/images/Img_02.png');
+    background-repeat: repeat-x;
+    animation: moveRight-race-night 6s linear infinite;
+  }
+  &__car {
+    position: absolute;
+    bottom: 4%;
+    left: 24%;
+    animation: suspension-race-night 1s linear infinite;
+  }
+  @keyframes moveRight-race-night {
+    100% {
+      transform: translateX(-2950px);
+    }
+  }
+  @keyframes suspension-race-night {
+    100% {
+      transform: translateY(-1px);
+    }
+    50% {
+      transform: translateY(2px);
+    }
+    0% {
+      transform: translateY(-1px);
+    }
+  }
+}

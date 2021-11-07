@@ -1,0 +1,75 @@
+.loading-container {
+  .loading-rain-svg {
+    width: 0;
+    height: 0;
+  }
+  &__rain {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 250px;
+    height: 250px;
+    overflow: hidden;
+    filter: url(#gooey);
+    .loading-dot {
+      position: absolute;
+      top: 15%;
+      left: 15%;
+      display: block;
+      width: 60%;
+      height: 60%;
+      transform: rotate(calc(45deg * var(--i)));
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0px;
+        left: calc(50% - 15px);
+        width: 30px;
+        height: 30px;
+        background: linear-gradient(45deg, #c7eeff, #03a9f4);
+        border-radius: 9999px;
+        box-shadow: 0px 0px 30px #00bcd4;
+      }
+      &.rotate {
+        animation: animate-loading-rain 2.5s ease-in-out infinite;
+        animation-delay: calc(-0.2s * var(--i));
+      }
+      &-0 {
+        --i: 0;
+      }
+      &-1 {
+        --i: 1;
+      }
+      &-2 {
+        --i: 2;
+      }
+      &-3 {
+        --i: 3;
+      }
+      &-4 {
+        --i: 4;
+      }
+      &-5 {
+        --i: 5;
+      }
+      &-6 {
+        --i: 6;
+      }
+      &-7 {
+        --i: 7;
+      }
+      &-8 {
+        --i: 8;
+      }
+    }
+    @keyframes animate-loading-rain {
+      0% {
+        transform: rotate(0deg);
+      }
+      100% {
+        transform: rotate(360deg);
+      }
+    }
+  }
+}

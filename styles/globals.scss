@@ -1,3 +1,13 @@
+@import '../components/backgrounds/rain/index.scss';
+@import '../components/loadings/rain/index.scss';
+@import '../components/backgrounds/snow/index.scss';
+@import '../components/loadings/snow/index.scss';
+@import '../components/backgrounds/raceNight/index.scss';
+@import '../components/loadings/raceNight/index.scss';
+@import '../components/backgrounds/sun/index.scss';
+@import '../components/loadings/sun/index.scss';
+@import '../components/backgrounds/normal/index.scss';
+@import '../components/loadings/normal/index.scss';
 html,
 body {
   padding: 0;
@@ -8,6 +18,41 @@ body {
 * {
   box-sizing: border-box;
   h1 {
-    background-color: red;
+    color: white;
+    background-color: rgba(80, 68, 68, 1);
   }
+}
+
+// Loading container 
+.loading-container {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  min-width: 100vw;
+  min-height: 100vh;
+  background-color: rgba(21, 21, 21, .85);
+  z-index: 2;
+}
+
+@keyframes animate-bg-snow {
+  0% {
+    transform: translateY(0%);
+    opacity: 0;
+  }
+  5% {
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(3000%);
+  }
+  100% {
+    transform: translateY(8000%);
+    opacity: 0;
+  }
+}
+
+// Border theme
+.border {
+  border: 3px solid #212121;
+  border-radius: 5px;
 }

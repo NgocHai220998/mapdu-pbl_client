@@ -1,17 +1,19 @@
 import Login from "../../pages/login";
+import { isLogin } from "../../utils/helpers";
 
 const withAuth = (Component: any) => {
   const Auth = (props: any) => {
-    
-
-    if (true) {
+    if (!isLogin()) {
       return (
         <Login />
       );
     }
 
     return (
-      <Component {...props} />
+      <>
+        <h1>Nguyen Ngoc Hai</h1>
+        <Component {...props} />
+      </>
     );
   };
 

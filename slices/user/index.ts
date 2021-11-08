@@ -5,16 +5,18 @@ const user = createSlice({
   initialState: {
     email: '',
     firstName: '',
-    lastName: ''
+    lastName: '',
+    token: ''
   },
   reducers: {
-    setUser: (state, action) => {
-
-    },
-    getUser: state => state
+    setUser: (state, action) => ({
+      ...state,
+      ...action.payload?.user,
+      token: action.payload.auth_token
+    }),
   }
 })
 
 const { reducer, actions } = user;
-export const { setUser, getUser } = actions;
+export const { setUser } = actions;
 export default reducer;

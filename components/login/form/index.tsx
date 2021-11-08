@@ -9,6 +9,8 @@ import { hiddenLoading, showLoadding } from '../../../slices/loading';
 import { jsonHeader, postMethod } from '../../../utils/fetchTool';
 import { API } from '../../../constants/api';
 import { showToast } from '../../../slices/toast';
+import { KEY_TYPES, setItem } from '../../../utils/localStoreTools';
+import { setUser } from '../../../slices/user';
 
 const useStyles = makeStyles({
   root: {
@@ -66,7 +68,10 @@ const HForm: NextPage = () => {
       .then(res => {
         dispatch(hiddenLoading())
         if (res.code === 200) {
-          console.log(res)
+          setItem(KEY_TYPES.AUTHEN, res?.data)
+          dispatch(setUser(res?.data));
+
+          router.push('/');
         } else {
           dispatch(showToast({
             message: res.errors?.message || 'Something wrong!',

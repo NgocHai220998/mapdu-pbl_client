@@ -3,6 +3,9 @@ import { makeStyles } from '@mui/styles';
 import { Grid } from '@mui/material';
 import Banner from '../../components/signup/banner';
 import HForm from '../../components/signup/form';
+import { useEffect } from 'react';
+import { isLogin } from '../../utils/helpers';
+import { useRouter } from 'next/dist/client/router';
 
 const useStyles = makeStyles({
   root: {
@@ -21,6 +24,11 @@ const useStyles = makeStyles({
 
 const Register: NextPage = () => {
   const classes: any = useStyles();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isLogin()) router.push('/')
+  }, [])
 
   return (
     <Grid container spacing={0} className={classes.root}>

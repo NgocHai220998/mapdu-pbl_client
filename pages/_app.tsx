@@ -19,9 +19,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <Provider store={store}>
       <main className="main-app">
-      <SwitchTheme />
-      <Component {...pageProps} />
-    </main>
+        <SwitchTheme />
+        <Component {...pageProps} />
+      </main>
     </Provider>
     
   )

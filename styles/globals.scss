@@ -17,10 +17,6 @@ body {
 
 * {
   box-sizing: border-box;
-  h1 {
-    color: white;
-    background-color: rgba(80, 68, 68, 1);
-  }
 }
 
 // Loading container 
@@ -55,4 +51,9 @@ body {
 .border {
   border: 3px solid #212121;
   border-radius: 5px;
+}
+
+// wrapper
+.wrapper {
+  padding: 8px;
 }

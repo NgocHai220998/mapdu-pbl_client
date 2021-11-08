@@ -3,7 +3,7 @@ import { THEME_TYPES } from "../../components/helpers/SwitchTheme/index.config";
 
 const theme = createSlice({
   name: 'theme',
-  initialState: THEME_TYPES.SNOW,
+  initialState: THEME_TYPES.NORMAL,
   reducers: {
     changeTheme: (_, action) => action.payload,
   }

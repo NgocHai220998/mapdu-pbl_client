@@ -5,7 +5,7 @@ export const jsonHeader = {
   },
 }
 
-export const parseJSON = response => {
+export const parseJSON = (response: any) => {
   let res = response.json()
   return res
 }
@@ -16,7 +16,7 @@ export const jsonHeaderAuth = () => {
     return {
       Accept: 'application/json',
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${user.jwt}`
+      Authorization: `Bearer ${user}`
     }
 
   return {
@@ -25,7 +25,7 @@ export const jsonHeaderAuth = () => {
   }
 }
 
-export const requestWithToken = token => {
+export const requestWithToken = (token: string) => {
   return {
     'Accept': 'application/json',
     'Content-Type': 'application/json',

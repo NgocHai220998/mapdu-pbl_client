@@ -2,8 +2,13 @@ import type { NextPage } from 'next'
 import { useFormik } from 'formik';
 import { Button, Checkbox, FormControlLabel, Grid, TextField } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { initialValues, validationSchema } from './config';
+import { IFormData, initialValues, validationSchema } from './config';
 import { useRouter } from 'next/dist/client/router';
+import { useDispatch } from 'react-redux';
+import { hiddenLoading, showLoadding } from '../../../slices/loading';
+import { jsonHeader, postMethod } from '../../../utils/fetchTool';
+import { API } from '../../../constants/api';
+import { showToast } from '../../../slices/toast';
 
 const useStyles = makeStyles({
   root: {
@@ -37,12 +42,41 @@ const useStyles = makeStyles({
 const HForm: NextPage = () => {
   const classes = useStyles();
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  const handleSubmit = (values: IFormData) => {
+    dispatch(showLoadding())
+  
+    fetch(API.SIGNUP_PATH, {
+      method: postMethod.method,
+      headers: jsonHeader.headers,
+      body: JSON.stringify({
+        user: {
+          email: values.email,
+          password: values.password,
+          password_confirmation: values.passwordConfirmation
+        }
+      })
+    }).then(response => response.json())
+      .then(res => {
+        dispatch(hiddenLoading())
+        if (res.code === 200) {
+          router.push('/login')
+        } else {
+          dispatch(showToast({
+            message: res.errors?.message || 'Something wrong!',
+            type: 'error'
+          }))
+        }
+      })
+      .catch(error => console.log(error))
+  }
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: validationSchema,
-    onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+    onSubmit: (values: IFormData) => {
+      handleSubmit(values);
     },
   });
 

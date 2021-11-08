@@ -1,6 +1,11 @@
 import * as yup from 'yup';
 
-export const initialValues = {
+export interface IFormData {
+  email: string;
+  password: string;
+}
+
+export const initialValues: IFormData = {
   email: '',
   password: '',
 }

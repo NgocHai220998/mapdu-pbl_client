@@ -2,10 +2,8 @@ import '../styles/globals.scss'
 import type { AppProps } from 'next/app'
 import dynamic from "next/dynamic";
 import SwitchTheme from '../components/helpers/SwitchTheme';
-import { useState } from 'react';
 import { Provider } from 'react-redux';
 import store from '../store';
-import { useRouter } from 'next/dist/client/router';
 import Toast from '../components/helpers/Toast';
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -17,7 +15,6 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Toast />
       </main>
     </Provider>
-    
   )
 }
 

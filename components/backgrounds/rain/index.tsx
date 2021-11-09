@@ -14,10 +14,14 @@ const BGRain = () => {
         .border {
           border-color: #0080FF;
         }
+        .border-selected {
+          border-color: green!important;
+        }
         .border-hover {
           border: 2px solid #fff0;
           &:hover {
             border: 2px solid #0080FF;
+            opacity: .65;
           }
         }
         .background {

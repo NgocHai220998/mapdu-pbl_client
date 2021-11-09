@@ -14,12 +14,16 @@ const BGRaceNight = () => {
           }
         }
         .border {
-          border-color: #e53838;
+          border-color: #e53838; 
+        }
+        .border-selected {
+          border-color: yellow!important;
         }
         .border-hover {
           border: 2px solid #fff0;
           &:hover {
             border: 2px solid #e53838;
+            opacity: .65;
           }
         }
         .background {

@@ -4,6 +4,7 @@ import { useRouter } from "next/dist/client/router";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { KEY_TYPES, removeItem } from "../../../../utils/localStoreTools";
+import Theme from "../theme";
 
 const Account: NextPage = () => {
   const user = useSelector((state: any) => state.user)
@@ -32,7 +33,7 @@ const Account: NextPage = () => {
             label="Log out" onClick={() => {
               removeItem(KEY_TYPES.AUTHEN)
               router.push('/login')
-            }} 
+            }}
             className="el-hover border-hover"
           />
         </div>
@@ -50,7 +51,7 @@ const Account: NextPage = () => {
           horizontal: 'left',
         }}
       >
-        <Typography sx={{ p: 2 }}>The content of the Popover.</Typography>
+      <Theme handleClose={handleClose} />
       </Popover>
       <style jsx>{`
         .nav-bar__account {

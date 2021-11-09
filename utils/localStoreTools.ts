@@ -1,5 +1,6 @@
 export const KEY_TYPES = {
-  AUTHEN: 'AUTHEN'
+  AUTHEN: 'AUTHEN',
+  THEME: 'THEME'
 }
 
 export const setItem = (key: string, value: any) => {

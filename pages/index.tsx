@@ -20,41 +20,6 @@ const Home: NextPage = () => {
   }
   return (
     <div style={{ margin: '30px'}}>
-      <Button
-        className="el-hover border border-snow"
-        onClick={() => handleChangeTheme(THEME_TYPES.RAIN)}
-        variant="contained"
-      >
-        Rain
-      </Button>
-      <Button
-        className="el-hover"
-        onClick={() => handleChangeTheme(THEME_TYPES.SUN)}
-        variant="contained"
-      >
-        Sun
-      </Button>
-      <Button
-        className="el-hover"
-        onClick={() => handleChangeTheme(THEME_TYPES.SNOW)}
-        variant="contained"
-      >
-        Snow
-      </Button>
-      <Button
-        className="el-hover"
-        onClick={() => handleChangeTheme(THEME_TYPES.RACE_NIGHT)}
-        variant="contained"
-      >
-        Race night
-      </Button>
-      <Button
-        className="el-hover"
-        onClick={() => handleChangeTheme(THEME_TYPES.NORMAL)}
-        variant="contained"
-      >
-        Normal
-      </Button>
     </div>
   )
 }

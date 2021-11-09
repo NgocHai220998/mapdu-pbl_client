@@ -42,10 +42,14 @@ const BGSnow = () => {
         .border {
           border-color: #45f1e1;
         }
+        .border-selected {
+          border-color: blue!important;
+        }
         .border-hover {
           border: 2px solid #fff0;
           &:hover {
             border: 2px solid #45f1e1;
+            opacity: .65;
           }
         }
         .background {

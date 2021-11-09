@@ -28,6 +28,10 @@ const BGRaceNight = () => {
         }
         .background {
           background-color: rgba(143, 72, 121, .75);
+
+          &-highlight {
+            background-color: #e53838;
+          }
         }
       `}
       </style>

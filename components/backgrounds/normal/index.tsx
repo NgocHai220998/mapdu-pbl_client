@@ -24,6 +24,10 @@ const BGNormal = () => {
         }
         .background {
           background-color: rgba(127, 85, 85, .75);
+
+          &-highlight {
+            background-color: #fdb55d;
+          }
         }
       `}
       </style>

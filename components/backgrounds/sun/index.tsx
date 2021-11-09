@@ -24,6 +24,10 @@ const BGSun = () => {
         }
         .background {
           background-color: rgba(165, 89, 89, .75);
+
+          &-highlight {
+            background-color: #fdb55d;
+          }
         }
       `}
       </style>

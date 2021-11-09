@@ -54,7 +54,11 @@ const BGSnow = () => {
         }
         .background {
           background-color: rgba(64, 60, 129, .75);
+          &-highlight {
+            background-color: #45f1e1;
+          }
         }
+        
       `}
       </style>
     </>

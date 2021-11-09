@@ -2,6 +2,7 @@ import { Grid } from "@mui/material"
 import { makeStyles } from "@mui/styles"
 import { NextPage } from "next"
 import Account from "./components/account"
+import Times from "./components/times"
 
 const withStyles = makeStyles({
   root: {
@@ -18,7 +19,9 @@ const NavBar: NextPage = () => {
   return (
     <Grid container className={classes.root} spacing={2}>
       <Grid item xs={4}></Grid>
-      <Grid item xs={4}></Grid>
+      <Grid item xs={4}>
+        <Times />
+      </Grid>
       <Grid className={classes.account} item xs={4}>
         <Account />
       </Grid>

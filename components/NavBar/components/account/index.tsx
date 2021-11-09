@@ -60,6 +60,7 @@ const Account: NextPage = () => {
           border-radius: 5px;
           padding: 8px 16px;
           box-sizing: border-box;
+          height: 56px;
           &-full_name {
             line-height: 40px;
             display: flex;

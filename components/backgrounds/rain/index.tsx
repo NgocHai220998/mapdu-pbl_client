@@ -26,6 +26,10 @@ const BGRain = () => {
         }
         .background {
           background-color: rgba(71, 160, 213, .75);
+
+          &-highlight {
+            background-color: #0080FF;
+          }
         }
       `}
       </style>

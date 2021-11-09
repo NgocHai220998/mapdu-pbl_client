@@ -1,13 +1,5 @@
 export const audioList = [
   {
-    name: '君の名は',
-    singer: 'Kamishiraishi Mone',
-    cover:
-      '/static/images/kiminonawa.jpeg',
-    musicSrc:
-      '/static/music/kiminonawa.mp3',
-  },
-  {
     name: '手紙',
     singer: 'Angela Aki',
     cover:
@@ -30,22 +22,6 @@ export const audioList = [
       '/static/images/thoikhongsailech.jpeg',
     musicSrc:
       '/static/music/thoikhongsailech.mp3',
-  },
-  {
-    name: '愛を込めて',
-    singer: 'Teshima Aoi',
-    cover:
-      '/static/images/umi.jpeg',
-    musicSrc:
-      '/static/music/umi.mp3',
-  },
-  {
-    name: '百万个可能 张含韵',
-    singer: 'Trương Hàm Vận',
-    cover:
-      '/static/images/mottrieukhanang.jpeg',
-    musicSrc:
-      '/static/music/mottrieukhanang.mp3',
   },
 ]
 

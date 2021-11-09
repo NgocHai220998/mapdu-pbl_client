@@ -12,11 +12,7 @@ export const delayTime = (time: number) => {
   })
 }
 
-const onGeoError = (err: any) => {
-  console.error("Error while trying to get position", err);
-}
-
-export const handleGetCurrentWeather = async (handleCallBack: any) => {
+export const handleGetCurrentWeather = async (handleCallBack: any, onGeoError: any) => {
   if (navigator.geolocation) {
       await navigator.geolocation.getCurrentPosition(handleCallBack, onGeoError);
   } else {

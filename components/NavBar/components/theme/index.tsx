@@ -98,13 +98,22 @@ const Theme = (props: IThemeProps) => {
         }))
       })
   }
+
+  const onGeoErrors = (err: any) => {
+    dispatch(hiddenLoading())
+
+    dispatch(showToast({
+      message: `can't access current location! 😱 Please allow it`,
+      type: 'error'
+    }))
+  }
   
   const handleChangeTheme = async (name: string) => {
     dispatch(showLoadding())
     handleClose()
 
     if (name === THEME_TYPES.CURRENT_LOCATION) {
-      await handleGetCurrentWeather(onGetWeatherSuccess)
+      await handleGetCurrentWeather(onGetWeatherSuccess, onGeoErrors)
       return;
     }
 
@@ -115,13 +124,10 @@ const Theme = (props: IThemeProps) => {
     dispatch(changeTheme(name));
   }
 
-  console.log(1)
-
-  useEffect(() => {
-    const dataTheme: any = getItem(KEY_TYPES.THEME)
-    console.log(1, dataTheme)
-    if (!dataTheme?.theme) handleChangeTheme(THEME_TYPES.CURRENT_LOCATION)
-  }, [])
+  // useEffect(() => {
+  //   const dataTheme: any = getItem(KEY_TYPES.THEME)
+  //   if (!dataTheme?.theme) handleChangeTheme(THEME_TYPES.CURRENT_LOCATION)
+  // }, [])
 
   return (
     <>

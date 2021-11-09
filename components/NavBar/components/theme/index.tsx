@@ -8,7 +8,7 @@ import { convertTextThemeByKeyName, getCityWeather, getLinkWeatherIcon, getTempW
 import { THEME_TYPES } from './../../../helpers/SwitchTheme/index.config';
 import { API } from "../../../../constants/api";
 import { showToast } from "../../../../slices/toast";
-import { ICONS, TIME_PM } from "../times/config";
+import { ICONS, ICONS_NIGHT, TIME_PM } from "../times/config";
 import { useEffect } from "react";
 
 
@@ -25,6 +25,10 @@ const Theme = (props: IThemeProps) => {
     let theme: string = THEME_TYPES.NORMAL
 
     switch (icon) {
+      case ICONS_NIGHT.CLEAR_SKY:
+      case ICONS_NIGHT.FEW_CLOUDS:
+      case ICONS_NIGHT.BROKEN_CLOUDS:
+      case ICONS_NIGHT.SCATTERED_CLOUDS:
       case ICONS.CLEAR_SKY:
       case ICONS.FEW_CLOUDS:
       case ICONS.BROKEN_CLOUDS:
@@ -36,15 +40,20 @@ const Theme = (props: IThemeProps) => {
         }
         break;
       }
+      case ICONS_NIGHT.RAIN:
+      case ICONS_NIGHT.SHOWER_RAIN:
+      case ICONS_NIGHT.THUNDERSTORM:
       case ICONS.RAIN:
       case ICONS.SHOWER_RAIN:
       case ICONS.THUNDERSTORM:
         theme = THEME_TYPES.RAIN
         break;
       case ICONS.SNOW:
+      case ICONS_NIGHT.SNOW:
         theme = THEME_TYPES.SNOW
         break;
       case ICONS.MIST:
+      case ICONS_NIGHT.MIST:
         theme = THEME_TYPES.RACE_NIGHT
         break;
       default:

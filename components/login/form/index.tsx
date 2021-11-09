@@ -70,11 +70,15 @@ const HForm: NextPage = () => {
         if (res.code === 200) {
           setItem(KEY_TYPES.AUTHEN, res?.data)
           dispatch(setUser(res?.data));
-
           router.push('/');
+
+          dispatch(showToast({
+            message: 'Welcome back!!! 😍',
+            type: 'success'
+          }))
         } else {
           dispatch(showToast({
-            message: res.errors?.message || 'Something wrong!',
+            message: `${res.errors?.message || 'Something wrong!'} 😱`,
             type: 'error'
           }))
         }

@@ -62,9 +62,14 @@ const HForm: NextPage = () => {
         dispatch(hiddenLoading())
         if (res.code === 200) {
           router.push('/login')
+
+          dispatch(showToast({
+            message: 'Account successfully created! 😍',
+            type: 'success'
+          }))
         } else {
           dispatch(showToast({
-            message: res.errors?.message || 'Something wrong!',
+            message: `${res.errors?.message || 'Something wrong!'} 😱`,
             type: 'error'
           }))
         }

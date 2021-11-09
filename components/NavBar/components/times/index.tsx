@@ -1,15 +1,17 @@
 import { NextPage } from "next";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { changeTheme } from "../../../../slices/theme";
-import { getItem, KEY_TYPES, setItem } from "../../../../utils/localStoreTools";
-import { THEME_TYPES } from "../../../helpers/SwitchTheme/index.config";
+import { getItem, KEY_TYPES } from "../../../../utils/localStoreTools";
 import { initDataWeather } from "../theme/config";
-import { ICONS, TIMES_CONFIG, TIME_PM } from "./config";
+import { TIMES_CONFIG } from "./config";
 
 const Times: NextPage = () => {
-  const dispatch = useDispatch();
   const [weather, setWeather] = useState<any>(initDataWeather)
+
+  const pad = (digits: number, value: any) => {
+    for(var n = value.toString(); n.length < digits; n = 0 + n);
+
+    return n;
+  }
 
   const updateClock = () => {
     let now: any = new Date();
@@ -32,14 +34,8 @@ const Times: NextPage = () => {
       hou = hou - 12;
     }
 
-    Number.prototype.pad = function(digits: any){
-      for(var n = this.toString(); n.length < digits; n = 0 + n);
-
-      return n;
-    }
-
     const months = TIMES_CONFIG.MONTHS, week = TIMES_CONFIG.WEEK, ids = TIMES_CONFIG.IDS;
-    const values = [week[dname], dnum.pad(2), months[mo], yr, hou.pad(2), min.pad(2), sec.pad(2), pe];
+    const values = [week[dname], pad(2, dnum), months[mo], yr, pad(2, hou), pad(2, min), pad(2, sec), pe];
 
     for(let i = 0; i < ids.length; i++) {
       const el: any = document.getElementById(ids[i]);

@@ -1,4 +1,6 @@
+import ReactJkMusicPlayer from "@jeffreyca/react-jinke-music-player";
 import NavBar from "../../components/NavBar";
+import PlayerMusic from "../../components/playerMusic";
 import Login from "../../pages/login";
 import { isLogined } from "../../utils/helpers";
 
@@ -12,6 +14,7 @@ const withAuth = (Component: any) => {
 
     return (
       <>
+        <PlayerMusic />
         <NavBar />
         <Component {...props} />
       </>

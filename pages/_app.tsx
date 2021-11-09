@@ -1,4 +1,5 @@
 import '../styles/globals.scss'
+import '@jeffreyca/react-jinke-music-player/assets/index.css'
 import type { AppProps } from 'next/app'
 import dynamic from "next/dynamic";
 import SwitchTheme from '../components/helpers/SwitchTheme';

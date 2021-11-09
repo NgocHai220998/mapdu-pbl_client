@@ -70,7 +70,6 @@ const HForm: NextPage = () => {
         if (res.code === 200) {
           setItem(KEY_TYPES.AUTHEN, res?.data)
           dispatch(setUser(res?.data));
-          console.log(res?.data)
           router.push('/');
 
           dispatch(showToast({
@@ -84,7 +83,13 @@ const HForm: NextPage = () => {
           }))
         }
       })
-      .catch(error => console.log(error))
+      .catch(() => {
+        dispatch(hiddenLoading())
+        dispatch(showToast({
+          message: 'Something wrong! 😱',
+          type: 'error'
+        }))
+      })
   }
 
   return (

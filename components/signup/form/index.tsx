@@ -75,7 +75,13 @@ const HForm: NextPage = () => {
           }))
         }
       })
-      .catch(error => console.log(error))
+      .catch(() => {
+        dispatch(hiddenLoading())
+        dispatch(showToast({
+          message: 'Something wrong! 😱',
+          type: 'error'
+        }))
+      })
   }
 
   const formik = useFormik({

@@ -11,3 +11,15 @@ export const delayTime = (time: number) => {
     setTimeout(() => resolve(true), time)
   })
 }
+
+const onGeoError = (err: any) => {
+  console.error("Error while trying to get position", err);
+}
+
+export const handleGetCurrentWeather = async (handleCallBack: any) => {
+  if (navigator.geolocation) {
+      await navigator.geolocation.getCurrentPosition(handleCallBack, onGeoError);
+  } else {
+      alert('GeoLocation not supported or not allowed');
+  }
+}

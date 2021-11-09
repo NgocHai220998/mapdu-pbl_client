@@ -1,6 +1,7 @@
 export const KEY_TYPES = {
   AUTHEN: 'AUTHEN',
-  THEME: 'THEME'
+  THEME: 'THEME',
+  WHEATHER: 'WEATHER'
 }
 
 export const setItem = (key: string, value: any) => {

@@ -1,9 +1,16 @@
 import { useDispatch, useSelector } from "react-redux";
 import { hiddenLoading, showLoadding } from "../../../../slices/loading";
 import { changeTheme } from "../../../../slices/theme";
-import { delayTime } from "../../../../utils/helpers";
-import { KEY_TYPES, setItem } from "../../../../utils/localStoreTools";
+import { delayTime, handleGetCurrentWeather } from "../../../../utils/helpers";
+import { getItem, KEY_TYPES, removeItem, setItem } from "../../../../utils/localStoreTools";
 import { ITheme, THEMES } from "./config";
+import { convertTextThemeByKeyName, getCityWeather, getLinkWeatherIcon, getTempWeather } from "./helper";
+import { THEME_TYPES } from './../../../helpers/SwitchTheme/index.config';
+import { API } from "../../../../constants/api";
+import { showToast } from "../../../../slices/toast";
+import { ICONS, TIME_PM } from "../times/config";
+import { useEffect } from "react";
+
 
 interface IThemeProps {
   handleClose: () => void
@@ -13,16 +20,99 @@ const Theme = (props: IThemeProps) => {
   const theme = useSelector((state: any) => state.theme)
   const dispatch = useDispatch();
   const { handleClose } = props;
+
+  const setThemeByWeather = (icon: string) => {
+    let theme: string = THEME_TYPES.NORMAL
+
+    switch (icon) {
+      case ICONS.CLEAR_SKY:
+      case ICONS.FEW_CLOUDS:
+      case ICONS.BROKEN_CLOUDS:
+      case ICONS.SCATTERED_CLOUDS: {
+        theme = THEME_TYPES.SUN
+        const hours: any = new Date().getHours()
+        if (hours >= TIME_PM) {
+          theme = THEME_TYPES.RACE_NIGHT
+        }
+        break;
+      }
+      case ICONS.RAIN:
+      case ICONS.SHOWER_RAIN:
+      case ICONS.THUNDERSTORM:
+        theme = THEME_TYPES.RAIN
+        break;
+      case ICONS.SNOW:
+        theme = THEME_TYPES.SNOW
+        break;
+      case ICONS.MIST:
+        theme = THEME_TYPES.RACE_NIGHT
+        break;
+      default:
+        theme = THEME_TYPES.NORMAL
+        break;
+    }
+
+    setItem(KEY_TYPES.THEME, { theme: theme })
+    dispatch(changeTheme(theme))
+  }
+
+  const onGetWeatherSuccess = async (position: any) => {
+    const lat = position.coords.latitude?.toString();
+    const lon = position.coords.longitude?.toString();
+
+    fetch(API.CURRENT_WEATHER(lat, lon))
+      .then(response => response.json())
+      .then(res => {
+        dispatch(hiddenLoading())
+        if (res?.base) {
+          removeItem(KEY_TYPES.WHEATHER)
+          setItem(KEY_TYPES.WHEATHER, {
+            icon: getLinkWeatherIcon(res),
+            temp: getTempWeather(res),
+            city: getCityWeather(res),
+            idIcon: res?.weather[0]?.icon || '10d'
+          })
+
+          setThemeByWeather(res?.weather[0]?.icon || '10d')
+        } else {
+          dispatch(showToast({
+            message: 'Something wrong! 😱',
+            type: 'error'
+          }))
+        }
+      })
+      .catch(() => {
+        dispatch(hiddenLoading())
+        dispatch(showToast({
+          message: 'Something wrong! 😱',
+          type: 'error'
+        }))
+      })
+  }
   
   const handleChangeTheme = async (name: string) => {
     dispatch(showLoadding())
     handleClose()
+
+    if (name === THEME_TYPES.CURRENT_LOCATION) {
+      await handleGetCurrentWeather(onGetWeatherSuccess)
+      return;
+    }
+
+    await delayTime(1000);
     setItem(KEY_TYPES.THEME, { theme: name })
-    await delayTime(2000)
 
     dispatch(hiddenLoading())
     dispatch(changeTheme(name));
   }
+
+  console.log(1)
+
+  useEffect(() => {
+    const dataTheme: any = getItem(KEY_TYPES.THEME)
+    console.log(1, dataTheme)
+    if (!dataTheme?.theme) handleChangeTheme(THEME_TYPES.CURRENT_LOCATION)
+  }, [])
 
   return (
     <>
@@ -35,6 +125,9 @@ const Theme = (props: IThemeProps) => {
                 className={`border-hover el-hover ${theme === item.name ? 'border-selected' : ''}`}
                 src={item.image} alt={item.name}
               />
+              <div onClick={() => handleChangeTheme(item.name)} className="theme-name background el-hover">
+                <span>{convertTextThemeByKeyName(item.name)}</span>
+              </div>
             </div>
           ))
         }
@@ -47,11 +140,26 @@ const Theme = (props: IThemeProps) => {
           flex-wrap: wrap;
           justify-content: space-around;
           &__item {
+            position: relative;
             width: 150px;
             height: 75px;
             margin-bottom: 2px;
             margin-top: 2px;
 
+            .theme-name {
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              transform: translate(-50%, -50%);
+              padding: 4px 8px;
+              border-radius: 5px;
+              line-height: 12px;
+              span {
+                font-size: 12px;
+                color: white;
+                white-space: nowrap;
+              }
+            }
             img {
               width: 100%;
               height: 100%;

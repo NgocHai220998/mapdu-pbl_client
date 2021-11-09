@@ -50,8 +50,11 @@ const Account: NextPage = () => {
           horizontal: 'left',
         }}
       >
-      <Theme handleClose={handleClose} />
+        <Theme handleClose={handleClose} />
       </Popover>
+      <div style={{display: 'none'}}>
+        <Theme handleClose={handleClose} />
+      </div>
       <style jsx>{`
         .nav-bar__account {
           display: flex;

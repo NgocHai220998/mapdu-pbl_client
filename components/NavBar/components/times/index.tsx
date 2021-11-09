@@ -1,8 +1,16 @@
 import { NextPage } from "next";
-import { useEffect } from "react";
-import { TIMES_CONFIG } from "./config";
+import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { changeTheme } from "../../../../slices/theme";
+import { getItem, KEY_TYPES, setItem } from "../../../../utils/localStoreTools";
+import { THEME_TYPES } from "../../../helpers/SwitchTheme/index.config";
+import { initDataWeather } from "../theme/config";
+import { ICONS, TIMES_CONFIG, TIME_PM } from "./config";
 
 const Times: NextPage = () => {
+  const dispatch = useDispatch();
+  const [weather, setWeather] = useState<any>(initDataWeather)
+
   const updateClock = () => {
     let now: any = new Date();
     let dname: any = now.getDay(),
@@ -35,8 +43,12 @@ const Times: NextPage = () => {
 
     for(let i = 0; i < ids.length; i++) {
       const el: any = document.getElementById(ids[i]);
-      el.firstChild.nodeValue = ' ' + values[i];
+      if (el?.firstChild) el.firstChild.nodeValue = ' ' + values[i];
     }
+
+
+    const weatherTmp: any = getItem(KEY_TYPES.WHEATHER) || initDataWeather
+    setWeather(weatherTmp)
   }
 
   const initClock = () => {
@@ -62,14 +74,37 @@ const Times: NextPage = () => {
             <span id="minutes">00</span>:
             <span id="seconds">00</span>
             <span className="background-highlight" id="period">AM</span>
+            <div className="times-container__weather">
+              <img src={weather.icon} alt="icon weather" />
+              <span className="weather-temp">{weather.temp}</span>
+              <div className="name-city">
+                <span>{weather.city}</span>
+              </div>
+            </div>
           </div>
         </div>
       </section>
       <style jsx>{`
-
+        
         .times-container {
           display: flex;
           justify-content: center;
+
+          &__weather {
+            display: inline-block;
+            position: relative;
+
+            .weather-temp {
+              display: inline-block;
+              font-size: 14px;
+            }
+            .name-city {
+              position: absolute;
+              top: 16px;
+              right: 4px;
+              font-size: 10px;
+            }
+          }
           &__datetime{
             color: #fff;
             background: #10101E;
@@ -99,7 +134,7 @@ const Times: NextPage = () => {
               align-items: center;
               font-family: "Comic Sans MS", "Comic Sans", cursive;
 
-              span:not(:last-child){
+              span:not(:last-child) {
                 position: relative;
                 margin: 0 6px;
                 font-weight: 600;
@@ -107,8 +142,8 @@ const Times: NextPage = () => {
                 letter-spacing: 3px;
               }
 
-              span:last-child{
-                font-size: 14px;
+              #period {
+                font-size: 10px;
                 font-weight: 600;
                 text-transform: uppercase;
                 margin-top: 10px;

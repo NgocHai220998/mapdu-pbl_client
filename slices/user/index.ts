@@ -9,8 +9,7 @@ const user = createSlice({
   name: 'user',
   initialState: {
     email: '',
-    firstName: '',
-    lastName: '',
+    full_name: '',
     token: '',
     ...userData
   },

@@ -21,13 +21,12 @@ const Account: NextPage = () => {
 
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
-  console.log(user)
 
   return (
     <>
       <section className="nav-bar__account background">
         <div className="nav-bar__account-full_name">
-          <span className="over-text">{user.fullName || user.email}</span>
+          <span className="over-text">{user.full_name || user.email}</span>
           <Chip 
             style={{ textDecoration: 'underline', color: 'rgba(256, 256, 256, .65)', marginTop: '4px' }} 
             label="Log out" onClick={() => {

@@ -54,7 +54,8 @@ const HForm: NextPage = () => {
         user: {
           email: values.email,
           password: values.password,
-          password_confirmation: values.passwordConfirmation
+          password_confirmation: values.passwordConfirmation,
+          full_name: `${values.firstName} ${values.lastName}`
         }
       })
     }).then(response => response.json())
@@ -199,7 +200,7 @@ const HForm: NextPage = () => {
           </Grid>
           <Grid item xs={12}>
             <div className="wrapper">
-              <Button color="primary" variant="contained" fullWidth type="submit">
+              <Button className="el-hover" color="primary" variant="contained" fullWidth type="submit">
                 Create Account
               </Button>
             </div>

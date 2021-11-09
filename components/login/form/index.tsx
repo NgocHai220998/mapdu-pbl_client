@@ -70,6 +70,7 @@ const HForm: NextPage = () => {
         if (res.code === 200) {
           setItem(KEY_TYPES.AUTHEN, res?.data)
           dispatch(setUser(res?.data));
+          console.log(res?.data)
           router.push('/');
 
           dispatch(showToast({
@@ -151,7 +152,7 @@ const HForm: NextPage = () => {
           </Grid>
           <Grid item xs={12}>
             <div className="wrapper">
-              <Button color="primary" variant="contained" fullWidth type="submit">
+              <Button className="el-hover" color="primary" variant="contained" fullWidth type="submit">
                 Log In
               </Button>
             </div>

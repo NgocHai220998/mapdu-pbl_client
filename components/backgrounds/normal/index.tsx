@@ -10,9 +10,10 @@ const BGNormal = () => {
           }
         }
         .border {
-          &.border-normal {
-            border-color: #fdb55d;
-          }
+          border-color: #fdb55d;
+        }
+        .background {
+          background-color: rgba(127, 85, 85, .75);
         }
       `}
       </style>

@@ -10,9 +10,10 @@ const BGSun = () => {
           }
         }
         .border {
-          &.border-sun {
-            border-color: #fdb55d;
-          }
+          border-color: #fdb55d;
+        }
+        .background {
+          background-color: rgba(165, 89, 89, .75);
         }
       `}
       </style>

@@ -40,9 +40,10 @@ const BGSnow = () => {
           }
         }
         .border {
-          &.border-snow {
-            border-color: #45f1e1;
-          }
+          border-color: #45f1e1;
+        }
+        .background {
+          background-color: rgba(64, 60, 129, .75);
         }
       `}
       </style>

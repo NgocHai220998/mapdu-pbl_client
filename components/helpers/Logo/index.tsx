@@ -18,13 +18,13 @@ const Logo = () => {
         
         .logo-text {
           position: relative;
-          font-family: "Avenir Next", sans-serif;
           font-weight: 900;
           font-size: 32px;
           text-transform: uppercase;
           font-style: italic;
           letter-spacing: 0.05em;
           display: inline-block;
+          font-family: "Comic Sans MS", "Comic Sans", cursive;
         }
         
         .logo-text::before {

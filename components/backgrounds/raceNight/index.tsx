@@ -14,9 +14,10 @@ const BGRaceNight = () => {
           }
         }
         .border {
-          &.border-night {
-            border-color: #e53838;
-          }
+          border-color: #e53838;
+        }
+        .background {
+          background-color: rgba(143, 72, 121, .75);
         }
       `}
       </style>

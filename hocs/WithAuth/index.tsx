@@ -1,3 +1,4 @@
+import NavBar from "../../components/NavBar";
 import Login from "../../pages/login";
 import { isLogin } from "../../utils/helpers";
 
@@ -11,7 +12,7 @@ const withAuth = (Component: any) => {
 
     return (
       <>
-        <h1>Nguyen Ngoc Hai</h1>
+        <NavBar />
         <Component {...props} />
       </>
     );

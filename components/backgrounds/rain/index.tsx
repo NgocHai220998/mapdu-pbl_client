@@ -12,9 +12,10 @@ const BGRain = () => {
           }
         }
         .border {
-          &.border-rain {
-            border-color: #0080FF;
-          }
+          border-color: #0080FF;
+        }
+        .background {
+          background-color: rgba(71, 160, 213, .75);
         }
       `}
       </style>

@@ -11,3 +11,7 @@ export const getItem = (key: string) => {
 
   return JSON.parse(result)
 }
+
+export const removeItem = (key: string) => {
+  window.localStorage.removeItem(key);
+}

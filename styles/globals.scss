@@ -57,3 +57,11 @@ body {
 .wrapper {
   padding: 8px;
 }
+
+.over-text {
+  display: inline-block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  padding-right: 8px;
+  white-space: nowrap;
+}

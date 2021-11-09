@@ -42,6 +42,12 @@ const BGSnow = () => {
         .border {
           border-color: #45f1e1;
         }
+        .border-hover {
+          border: 2px solid #fff0;
+          &:hover {
+            border: 2px solid #45f1e1;
+          }
+        }
         .background {
           background-color: rgba(64, 60, 129, .75);
         }

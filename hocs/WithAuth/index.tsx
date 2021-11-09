@@ -1,10 +1,10 @@
 import NavBar from "../../components/NavBar";
 import Login from "../../pages/login";
-import { isLogin } from "../../utils/helpers";
+import { isLogined } from "../../utils/helpers";
 
 const withAuth = (Component: any) => {
   const Auth = (props: any) => {
-    if (!isLogin()) {
+    if (!isLogined()) {
       return (
         <Login />
       );

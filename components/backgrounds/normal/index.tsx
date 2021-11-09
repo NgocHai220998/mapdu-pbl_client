@@ -12,6 +12,12 @@ const BGNormal = () => {
         .border {
           border-color: #fdb55d;
         }
+        .border-hover {
+          border: 2px solid #fff0;
+          &:hover {
+            border: 2px solid #fdb55d;
+          }
+        }
         .background {
           background-color: rgba(127, 85, 85, .75);
         }

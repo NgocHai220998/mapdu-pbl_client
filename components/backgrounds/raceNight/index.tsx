@@ -16,6 +16,12 @@ const BGRaceNight = () => {
         .border {
           border-color: #e53838;
         }
+        .border-hover {
+          border: 2px solid #fff0;
+          &:hover {
+            border: 2px solid #e53838;
+          }
+        }
         .background {
           background-color: rgba(143, 72, 121, .75);
         }

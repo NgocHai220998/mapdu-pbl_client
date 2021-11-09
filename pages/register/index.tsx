@@ -4,7 +4,7 @@ import { Grid } from '@mui/material';
 import Banner from '../../components/signup/banner';
 import HForm from '../../components/signup/form';
 import { useEffect } from 'react';
-import { isLogin } from '../../utils/helpers';
+import { isLogined } from '../../utils/helpers';
 import { useRouter } from 'next/dist/client/router';
 
 const useStyles = makeStyles({
@@ -27,7 +27,7 @@ const Register: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
-    if (isLogin()) router.push('/')
+    if (isLogined()) router.push('/')
   }, [])
 
   return (

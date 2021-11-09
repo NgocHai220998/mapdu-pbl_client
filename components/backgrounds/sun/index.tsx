@@ -12,6 +12,12 @@ const BGSun = () => {
         .border {
           border-color: #fdb55d;
         }
+        .border-hover {
+          border: 2px solid #fff0;
+          &:hover {
+            border: 2px solid #fdb55d;
+          }
+        }
         .background {
           background-color: rgba(165, 89, 89, .75);
         }

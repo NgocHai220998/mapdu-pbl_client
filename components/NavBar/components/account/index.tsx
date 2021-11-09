@@ -33,11 +33,11 @@ const Account: NextPage = () => {
               removeItem(KEY_TYPES.AUTHEN)
               router.push('/login')
             }} 
-            className="el-hover"
+            className="el-hover border-hover"
           />
         </div>
         <div className="nav-bar__account-avatar el-hover">
-          <img aria-describedby={id} onClick={handleClick} src="/static/images/naruto1.jpeg" alt="avatar" />
+          <img className="border-hover" aria-describedby={id} onClick={handleClick} src="/static/images/naruto1.jpeg" alt="avatar" />
         </div>
       </section>
       <Popover

@@ -11,9 +11,11 @@ import { showToast } from "../../slices/toast";
 import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from "../../constants/config";
 import { IWorkspace, setWorkSpaces } from "../../slices/workspace";
 import { convertTime, delayTime } from "../../utils/helpers";
+import { useRouter } from "next/dist/client/router";
 
 const Workspace: NextPage = () => {
   const dispatch = useDispatch();
+  const router = useRouter();
   const user = useSelector((state: any) => state.user);
   const workspaces = useSelector((state: any) => state.work_spaces);
 
@@ -25,6 +27,7 @@ const Workspace: NextPage = () => {
 
   const handleListItemClick = (index: number) => {
     setSelectedIndex(index);
+    router.push(`/?workspace_id=${index}`, undefined, { shallow: true })
   };
 
   const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {

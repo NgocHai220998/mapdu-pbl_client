@@ -8,6 +8,14 @@ export interface IWorkspace {
   updated_at: string | Date;
 }
 
+export const WORKSPACE_EMPTY = {
+  id: 0,
+  name: '',
+  description: '',
+  created_at: '',
+  updated_at: ''
+}
+
 const initValues: IWorkspace[] = []
 
 const workspaces = createSlice({

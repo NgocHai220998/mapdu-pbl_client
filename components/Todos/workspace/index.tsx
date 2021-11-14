@@ -1,15 +1,22 @@
 import { NextPage } from "next"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button, Menu } from "@mui/material"
 import MenuDetail from "./components/detail";
 import MenuDelete from "./components/delete";
 import MenuEdit from "./components/edit";
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import MenuCreate from "./components/create";
+import { IWorkspace } from "../../../slices/workspace";
 
-const TodosWorkspace: NextPage = () => {
+interface IWorkspaceProps {
+  workspace: IWorkspace;
+}
+
+const TodosWorkspace: NextPage<IWorkspaceProps> = (props: IWorkspaceProps) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+  const { workspace } = props;
+
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
@@ -18,12 +25,11 @@ const TodosWorkspace: NextPage = () => {
     setAnchorEl(null);
   };
 
-
   return (
     <>
       <div className="todos-container__header">
         <div className="workspace-name">
-          <span className="over-text">Workspace: <i>Học lập trình react native</i></span>
+          <span className="over-text">Workspace: <i>{workspace.name}</i></span>
         </div>
         <div className="workspace-action">
           <Button
@@ -49,7 +55,7 @@ const TodosWorkspace: NextPage = () => {
               'aria-labelledby': 'basic-button',
             }}
           >
-            <MenuDetail handleCloseMenu={handleClose} />
+            <MenuDetail handleCloseMenu={handleClose} workspace={workspace} />
             <MenuEdit handleCloseMenu={handleClose} />
             <MenuDelete handleCloseMenu={handleClose} />
           </Menu>

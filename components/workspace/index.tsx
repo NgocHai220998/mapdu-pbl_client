@@ -9,15 +9,14 @@ import { API } from "../../constants/api";
 import { getMethod, requestWithToken } from "../../utils/fetchTool";
 import { showToast } from "../../slices/toast";
 import { DEFAULT_PAGE, DEFAULT_PER_PAGE } from "../../constants/config";
-import { IWorkspace, setWorkSpaces } from "../../slices/workspace";
+import { fetchWorkspaces, IWorkspace, setWorkSpaces } from "../../slices/workspace";
 import { convertTime, delayTime } from "../../utils/helpers";
 import { useRouter } from "next/dist/client/router";
 
 const Workspace: NextPage = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const user = useSelector((state: any) => state.user);
-  const workspaces = useSelector((state: any) => state.work_spaces);
+  const workspaces = useSelector((state: any) => state.workspaces.collection);
 
   const [datas, setDatas] = useState<IWorkspace[]>(workspaces)
   const [totalPage, setTotalPage] = useState<number>(1)
@@ -39,38 +38,23 @@ const Workspace: NextPage = () => {
     dispatch(showLoadding())
     await delayTime(500);
 
-    fetch(API.GET_WORKSPACE(page, perPage), {
-      method: getMethod.method,
-      headers: requestWithToken(user.token)
-    }).then(response => response.json())
-      .then(res => {
-        dispatch(hiddenLoading())
-        if (res.code === 200) {
-          const wspaces: IWorkspace[] = res?.data?.work_spaces?.collection || []
-          dispatch(setWorkSpaces(wspaces))
-
-          setDatas(wspaces)
-          setTotalPage(res?.data?.work_spaces?.pagination?.pages || 1)
-          handleListItemClick(wspaces[0].id)
-        } else {
-          dispatch(showToast({
-            message: `${res.errors?.message || 'Something wrong!'} 😱`,
-            type: 'error'
-          }))
-        }
-      })
-      .catch(() => {
-        dispatch(hiddenLoading())
-        dispatch(showToast({
-          message: 'Something wrong! 😱',
-          type: 'error'
-        }))
-      })
+    const data: any = await dispatch(fetchWorkspaces({ page: page, perPage: perPage}))
+    const wspaces: IWorkspace[] = data?.payload?.collection || []
+    dispatch(setWorkSpaces(wspaces))
+    setDatas(wspaces)
+    setTotalPage(data?.payload?.pagination?.pages || 1)
+    handleListItemClick(wspaces[0]?.id)
+    dispatch(hiddenLoading())
   }
 
   useEffect(() => {
     handleGetWorkspaces()
   }, [])
+
+  useEffect(() => {
+    setDatas(workspaces)
+    handleListItemClick(workspaces[0]?.id)
+  }, [workspaces])
 
   return (
     <>

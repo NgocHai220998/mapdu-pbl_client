@@ -8,13 +8,13 @@ import TodosWorkspace from "./workspace"
 
 const Todos: NextPage = () => {
   const router = useRouter();
-  const workspaces = useSelector((state: any) => state.workspaces)
+  const workspaces = useSelector((state: any) => state.workspaces.collection)
   const [workspace, setWorkspace] = useState<IWorkspace>(WORKSPACE_EMPTY)
 
   useEffect(() => {
     const workspaceID: number = router.query?.workspace_id || workspaces[0]?.id
     setWorkspace(getWorkspaceByID(workspaces, workspaceID)) 
-  }, [router.query.workspace_id])
+  }, [router.query.workspace_id, workspaces])
 
   return (
     <>

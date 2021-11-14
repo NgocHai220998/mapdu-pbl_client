@@ -11,5 +11,6 @@ export const API = {
   },
   GET_WORKSPACE: (page = DEFAULT_PAGE, per_page = DEFAULT_PER_PAGE) => {
     return `${END_POINT}/api/work_spaces/${page}/${per_page}`;
-  }
+  },
+  CREATE_WORKSPACE: `${END_POINT}/api/work_spaces`,
 }

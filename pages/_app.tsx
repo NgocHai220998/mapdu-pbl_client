@@ -1,4 +1,6 @@
 import '../styles/globals.scss'
+import "@uiw/react-md-editor/dist/markdown-editor.css";
+import "@uiw/react-markdown-preview/dist/markdown.css";
 import '@jeffreyca/react-jinke-music-player/assets/index.css'
 import type { AppProps } from 'next/app'
 import dynamic from "next/dynamic";

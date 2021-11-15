@@ -13,4 +13,5 @@ export const API = {
     return `${END_POINT}/api/work_spaces/${page}/${per_page}`;
   },
   CREATE_WORKSPACE: `${END_POINT}/api/work_spaces`,
+  UPDATE_WORKSPACE: (id: number) => `${END_POINT}/api/work_spaces/${id}`,
 }

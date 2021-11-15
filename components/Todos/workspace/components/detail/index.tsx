@@ -1,9 +1,10 @@
 import { NextPage } from "next"
 import { useState } from "react";
-import { Dialog, DialogContent, DialogTitle, IconButton, MenuItem, Typography } from "@mui/material"
+import { Dialog, DialogContent, DialogTitle, IconButton, MenuItem } from "@mui/material"
 import { styled } from "@mui/styles";
 import CloseIcon from '@mui/icons-material/Close';
 import { IWorkspace } from "../../../../../slices/workspace";
+import MDEditor from '@uiw/react-md-editor';
 
 const BootstrapDialog = styled(Dialog)(() => ({
   '& .MuiDialogContent-root': {
@@ -57,7 +58,6 @@ const MenuDetail: NextPage<IMenuDetailProps> = (props: IMenuDetailProps) => {
     handleCloseMenu();
   };
 
-
   return (
     <>
       <MenuItem className="el-hover" onClick={handleClickOpen}>Detail</MenuItem>
@@ -70,9 +70,7 @@ const MenuDetail: NextPage<IMenuDetailProps> = (props: IMenuDetailProps) => {
           {workspace?.name || "Updating..."}
         </BootstrapDialogTitle>
         <DialogContent dividers>
-          <Typography gutterBottom>
-            {workspace?.description || "Updating..."}
-          </Typography>
+          <MDEditor.Markdown source={workspace?.description || "Updating..."} />
         </DialogContent>
       </BootstrapDialog>
     </>

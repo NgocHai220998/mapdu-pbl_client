@@ -68,7 +68,7 @@ const Workspace: NextPage = () => {
                   className={`${selectedIndex === workspace.id ? 'selected' : 'el-hover border-hover'}`}
                   onClick={() => handleListItemClick(workspace.id)}
                 >
-                  <ListItemText primary={workspace.name} secondary={convertTime(workspace.created_at)} />
+                  <ListItemText primary={workspace.name} secondary={convertTime(workspace.updated_at)} />
                 </ListItemButton>
               ))
             }

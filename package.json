@@ -5,7 +5,9 @@
     "start-local": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install",
+    "pre-commit": "next lint"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
@@ -31,6 +33,7 @@
     "@types/react": "17.0.34",
     "eslint": "7",
     "eslint-config-next": "12.0.2",
+    "husky": "^7.0.4",
     "typescript": "4.4.4"
   }
 }

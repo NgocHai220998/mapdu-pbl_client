@@ -95,7 +95,7 @@ const MenuDelete: NextPage<IMenuDeleteProps> = (props: IMenuDeleteProps) => {
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            If you "Agree" then the data will also be deleted and can't be restored!
+            {`If you "Agree" then the data will also be deleted and can't be restored!`}
           </DialogContentText>
         </DialogContent>
         <DialogActions>

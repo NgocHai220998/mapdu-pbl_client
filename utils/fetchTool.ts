@@ -42,7 +42,7 @@ export const getMethod = {
 }
 
 export const deleteMethod = {
-  method: 'DELTE',
+  method: 'DELETE',
 }
 
 export const putMethod = {

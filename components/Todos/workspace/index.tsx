@@ -57,7 +57,7 @@ const TodosWorkspace: NextPage<IWorkspaceProps> = (props: IWorkspaceProps) => {
           >
             <MenuDetail handleCloseMenu={handleClose} workspace={workspace} />
             <MenuEdit handleCloseMenu={handleClose} workspace={workspace}/>
-            <MenuDelete handleCloseMenu={handleClose} />
+            <MenuDelete handleCloseMenu={handleClose} workspace={workspace} />
           </Menu>
         </div>
         <div className="workspace-new">

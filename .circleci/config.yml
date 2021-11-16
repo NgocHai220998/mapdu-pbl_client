@@ -1,0 +1,30 @@
+version: 2.1
+
+jobs:
+  lint:
+    docker:
+      - image: circleci/node:16.13.0-bullseye-browsers-legacy
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run:
+          name: check directory
+          command: |
+            pwd
+      - run:
+          name: install dependencies
+          command: |
+            npm install
+      - run:
+          name: run lint
+          command: |
+            npm run lint
+workflows:
+  push:
+    jobs:
+      - lint:
+          filters:
+            branches:
+              only:
+                - /.*/

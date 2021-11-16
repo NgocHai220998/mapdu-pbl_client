@@ -2,18 +2,28 @@ import { Chip, IconButton, Popover } from "@mui/material";
 import SyncIcon from '@mui/icons-material/Sync';
 import AlarmIcon from '@mui/icons-material/Alarm';
 import { NextPage } from "next";
-import { useState } from "react";
-import { POMODORO_OPTIONS } from "./config";
+import { useEffect, useState } from "react";
+import { ITimerValue, POMODORO_OPTIONS, SECOND_TIME, TIMER_VALUES } from "./config";
 import TimerSetting from "./components/settings";
+import { getItem, KEY_TYPES } from "../../../../utils/localStoreTools";
+import { convertTime, getTimeByTimerSelected } from "./helper";
 
 const PomodoroTimer: NextPage = () => {
   const [pomoSelected, setPomoSelected] = useState<string>(POMODORO_OPTIONS.POMODORO)
+  const [time, setTime] = useState<number>(TIMER_VALUES.pomo * SECOND_TIME);
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const [timer, setTimer] = useState<ITimerValue>(TIMER_VALUES)
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
   };
+
+  const handleSaveTimer = (value: ITimerValue) => {
+    setTimer(value)
+    setTime(getTimeByTimerSelected(pomoSelected, value) * SECOND_TIME)
+  }
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -24,13 +34,21 @@ const PomodoroTimer: NextPage = () => {
 
   const handleSelectPomo = (value: string) => {
     setPomoSelected(value);
+    setTime(getTimeByTimerSelected(value, timer) * SECOND_TIME)
   }
+
+  useEffect(() => {
+    const timerValues: ITimerValue = getItem(KEY_TYPES.TIMER_SETTING)
+    setTimer(timerValues);
+    setTime(timerValues.pomo * SECOND_TIME);
+  }, []);
+
   return (
     <>
       <div className="pomodoro-container background">
         <div className="pomodoro-header">
           <div className="pomodoro-timer">
-            <span>00:58</span>
+            <span>{convertTime(time)}</span>
           </div>
           <div className="pomodoro-btn-start">
             <Chip className="el-hover" style={{ color: 'white', paddingLeft: '16px', paddingRight: '16px' }} label="Start" variant="outlined" onClick={() => {}} />
@@ -83,7 +101,7 @@ const PomodoroTimer: NextPage = () => {
           horizontal: 'left',
         }}
       >
-        <TimerSetting handleClose={handleClose} />
+        <TimerSetting handleSaveTimer={handleSaveTimer} handleClose={handleClose} />
       </Popover>
       <style jsx>{`
         .pomodoro-container {

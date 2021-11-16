@@ -1,15 +1,17 @@
 import { Button } from "@mui/material";
 import { NextPage } from "next"
-import { useState } from "react";
-import { KEY_TYPES, setItem } from "../../../../../../utils/localStoreTools";
+import { useEffect, useState } from "react";
+import { getItem, KEY_TYPES, setItem } from "../../../../../../utils/localStoreTools";
+import { ITimerValue, TIMER_VALUES } from "../../config";
 import { TIMER_SETTINGS } from "./config";
 
 interface ITimerSettingProps {
-  handleClose: () => void
+  handleClose: () => void;
+  handleSaveTimer: (value: ITimerValue) => void;
 }
 
 const TimerSetting: NextPage<ITimerSettingProps> = (props: ITimerSettingProps) => {
-  const { handleClose } = props;
+  const { handleClose, handleSaveTimer } = props;
   const [pomo, setPomo] = useState<number>(TIMER_SETTINGS.POMODORO_TIME)
   const [shortTime, setShortTime] = useState<number>(TIMER_SETTINGS.SHORT_TIME)
   const [longTime, setLongTime] = useState<number>(TIMER_SETTINGS.LONG_TIME)
@@ -20,9 +22,22 @@ const TimerSetting: NextPage<ITimerSettingProps> = (props: ITimerSettingProps) =
       shortTime,
       longTime
     })
-
+    handleSaveTimer({
+      pomo,
+      shortTime,
+      longTime
+    })
     handleClose();
   }
+
+  useEffect(() => {
+    const timer: ITimerValue = getItem(KEY_TYPES.TIMER_SETTING)
+    if (timer?.pomo) {
+      setPomo(timer?.pomo || TIMER_SETTINGS.POMODORO_TIME);
+      setShortTime(timer?.shortTime || TIMER_SETTINGS.SHORT_TIME);
+      setLongTime(timer?.longTime || TIMER_SETTINGS.LONG_TIME);
+    }
+  }, []);
 
   return (
     <>

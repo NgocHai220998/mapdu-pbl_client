@@ -1,12 +1,26 @@
-import { Chip, IconButton } from "@mui/material";
+import { Chip, IconButton, Popover } from "@mui/material";
 import SyncIcon from '@mui/icons-material/Sync';
 import AlarmIcon from '@mui/icons-material/Alarm';
 import { NextPage } from "next";
 import { useState } from "react";
 import { POMODORO_OPTIONS } from "./config";
+import TimerSetting from "./components/settings";
 
 const PomodoroTimer: NextPage = () => {
   const [pomoSelected, setPomoSelected] = useState<string>(POMODORO_OPTIONS.POMODORO)
+
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+
+  const handleClick = (event: any) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'simple-popover' : undefined;
 
   const handleSelectPomo = (value: string) => {
     setPomoSelected(value);
@@ -27,7 +41,7 @@ const PomodoroTimer: NextPage = () => {
             </IconButton>
           </div>
           <div className="pomodoro-btn-setting">
-            <IconButton className="el-hover" aria-label="delete">
+            <IconButton onClick={handleClick} className="el-hover" aria-label="delete">
               <AlarmIcon style={{ color: 'white' }} />
             </IconButton>
           </div>
@@ -59,6 +73,18 @@ const PomodoroTimer: NextPage = () => {
           </div>
         </div>
       </div>
+      <Popover
+        id={id}
+        open={open}
+        anchorEl={anchorEl}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: 'bottom',
+          horizontal: 'left',
+        }}
+      >
+        <TimerSetting handleClose={handleClose} />
+      </Popover>
       <style jsx>{`
         .pomodoro-container {
           margin-right: 12px;

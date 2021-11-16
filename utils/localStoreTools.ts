@@ -1,7 +1,8 @@
 export const KEY_TYPES = {
   AUTHEN: 'AUTHEN',
   THEME: 'THEME',
-  WHEATHER: 'WEATHER'
+  WHEATHER: 'WEATHER',
+  TIMER_SETTING: 'TIMER_SETTING'
 }
 
 export const setItem = (key: string, value: any) => {

@@ -1,26 +1,28 @@
 import type { NextPage } from 'next'
-import { useDispatch } from 'react-redux'
-import { THEME_TYPES } from '../components/helpers/SwitchTheme/index.config';
-import { hiddenLoading, showLoadding } from '../slices/loading';
-import { changeTheme } from '../slices/theme';
-import { delayTime } from '../utils/helpers';
 
-import Button from '@mui/material/Button';
 import withAuth from '../hocs/WithAuth';
+import { Grid } from '@mui/material';
+import { makeStyles } from '@mui/styles';
+import Workspace from '../components/workspace';
+import Todos from '../components/Todos';
+
+const useStyles = makeStyles({
+  root: {
+    padding: '16px',
+  }
+})
 
 const Home: NextPage = () => {
-  const dispatch = useDispatch();
-
-  const handleChangeTheme = async (theme: string) => {
-    dispatch(showLoadding())
-    await delayTime(3000)
-
-    dispatch(hiddenLoading())
-    dispatch(changeTheme(theme));
-  }
+  const classes = useStyles();
   return (
-    <div style={{ margin: '30px'}}>
-    </div>
+    <Grid className={classes.root} container spacing={4}>
+      <Grid item xs={3}>
+        <Workspace />
+      </Grid>
+      <Grid item xs={9}>
+        <Todos />
+      </Grid>
+    </Grid>
   )
 }
 

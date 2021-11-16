@@ -26,9 +26,7 @@ const Register: NextPage = () => {
   const classes: any = useStyles();
   const router = useRouter();
 
-  useEffect(() => {
-    if (isLogined()) router.push('/')
-  }, [])
+  if (isLogined()) router.push('/')
 
   return (
     <Grid container spacing={0} className={classes.root}>

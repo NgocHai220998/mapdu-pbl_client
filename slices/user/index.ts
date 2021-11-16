@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { getItem } from "../../utils/localStoreTools";
 
 let userData = getItem(KEY_TYPES.AUTHEN);
+let token = userData?.auth_token || ''
 userData = userData?.auth_token ? userData.user : {}
 
 const user = createSlice({
@@ -10,8 +11,8 @@ const user = createSlice({
   initialState: {
     email: '',
     full_name: '',
-    token: '',
-    ...userData
+    ...userData,
+    token
   },
   reducers: {
     setUser: (state, action) => ({

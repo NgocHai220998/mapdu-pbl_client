@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { IWorkspace, WORKSPACE_EMPTY } from "../../slices/workspace"
 import { getWorkspaceByID } from "./helper"
+import TodoList from "./List"
 import TodosWorkspace from "./workspace"
 
 const Todos: NextPage = () => {
@@ -20,6 +21,7 @@ const Todos: NextPage = () => {
     <>
       <div className="todos-container background">
         <TodosWorkspace workspace={workspace} />
+        <TodoList workspace={workspace}/>
       </div>
       <style jsx global>{`
         .todos-container {

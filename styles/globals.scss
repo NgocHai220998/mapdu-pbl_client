@@ -79,3 +79,8 @@ body {
   padding: 16px;
   margin: 0px;
 }
+
+// Custom mui css accordin
+.MuiPaper-root.MuiPaper-elevation.MuiPaper-rounded.MuiAccordion-root.MuiAccordion-rounded {
+  border-radius: 4px;
+}

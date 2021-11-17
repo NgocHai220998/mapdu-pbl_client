@@ -6,11 +6,13 @@ import { useEffect, useState } from "react";
 import { ITimerValue, POMODORO_OPTIONS, SECOND_TIME, TIMER_VALUES } from "./config";
 import TimerSetting from "./components/settings";
 import { getItem, KEY_TYPES } from "../../../../utils/localStoreTools";
-import { convertTime, getTimeByTimerSelected } from "./helper";
+import { convertTime, getTimeByTimerSelected, isRunning } from "./helper";
 
 const PomodoroTimer: NextPage = () => {
   const [pomoSelected, setPomoSelected] = useState<string>(POMODORO_OPTIONS.POMODORO)
   const [time, setTime] = useState<number>(TIMER_VALUES.pomo * SECOND_TIME);
+  const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [machineTime, setMachineTime] = useState<any>(null);
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
 
@@ -23,6 +25,7 @@ const PomodoroTimer: NextPage = () => {
   const handleSaveTimer = (value: ITimerValue) => {
     setTimer(value)
     setTime(getTimeByTimerSelected(pomoSelected, value) * SECOND_TIME)
+    handleStopPomodoro();
   }
 
   const handleClose = () => {
@@ -35,6 +38,30 @@ const PomodoroTimer: NextPage = () => {
   const handleSelectPomo = (value: string) => {
     setPomoSelected(value);
     setTime(getTimeByTimerSelected(value, timer) * SECOND_TIME)
+    handleStopPomodoro()
+  }
+
+  const runPomodoro = () => {
+    setIsStarted(true);
+    setMachineTime(setInterval(() => {
+      setTime((value: number) => {
+        console.log(value)
+        return value - 1;
+      });
+    }, 1000))
+  }
+
+  const handleStopPomodoro = () => {
+    setIsStarted(false);
+    clearInterval(machineTime)
+    setMachineTime(null)
+  }
+
+  const handleResetPomodoro = () => {
+    const timerValues: ITimerValue = getItem(KEY_TYPES.TIMER_SETTING)
+    setTimer(timerValues);
+    setTime(timerValues.pomo * SECOND_TIME);
+    handleStopPomodoro();
   }
 
   useEffect(() => {
@@ -51,10 +78,20 @@ const PomodoroTimer: NextPage = () => {
             <span>{convertTime(time)}</span>
           </div>
           <div className="pomodoro-btn-start">
-            <Chip className="el-hover" style={{ color: 'white', paddingLeft: '16px', paddingRight: '16px' }} label="Start" variant="outlined" onClick={() => {}} />
+            <Chip 
+              className="el-hover"
+              style={{
+                color: 'white',
+                paddingLeft: '8px',
+                paddingRight: '8px',
+                backgroundColor: isStarted ? '#cb2020' : isRunning(pomoSelected, time, timer) ? '#3369bb' : '#00000000'
+              }}
+              label={isStarted ? 'Pause' : isRunning(pomoSelected, time, timer) ? 'Continue' : 'Start'} variant="outlined"
+              onClick={isStarted ? handleStopPomodoro : runPomodoro}
+            />
           </div>
           <div className="pomodoro-btn-reset">
-            <IconButton className="el-hover" aria-label="delete">
+            <IconButton onClick={handleResetPomodoro} className="el-hover" aria-label="delete">
               <SyncIcon style={{ color: 'white' }} />
             </IconButton>
           </div>

@@ -19,3 +19,9 @@ export const getTimeByTimerSelected = (value: string, timer: ITimerValue) => {
       return timer.pomo
   }
 }
+
+export const isRunning = (pomoSelected: string, time: number, timer: ITimerValue) => {
+  const timeRunning: number = getTimeByTimerSelected(pomoSelected, timer) * SECOND_TIME;
+
+  return time < timeRunning ? true : false;
+}

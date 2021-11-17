@@ -47,7 +47,7 @@ const TodoList: NextPage<ITodoListProps> = (props: ITodoListProps) => {
         </div>
         {
           !!datas.length ? datas?.map((item: ITodo) => (
-            <TodoItem key={`todos-${item.id}`} todo={item}/>
+            <TodoItem key={`todos-${item.id}`} todo={item} workspace={workspace} />
           )) : (
             <p className="no-data">No Data</p>
           )

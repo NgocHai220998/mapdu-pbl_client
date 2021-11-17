@@ -7,9 +7,11 @@ export interface ITodo {
   id: number;
   work_space_id?: string;
   description?: string;
-  title?: string;
-  created_at: string | Date;
-  updated_at: string | Date;
+  title: string;
+  priority?: string;
+  status?: string;
+  created_at?: string | Date;
+  updated_at?: string | Date;
 }
 
 export const TODO_EMPTY = {
@@ -17,6 +19,8 @@ export const TODO_EMPTY = {
   work_space_id: 0,
   description: '',
   title: '',
+  prioriy: 'LOW',
+  status: 'TODO',
   created_at: '',
   updated_at: ''
 }

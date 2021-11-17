@@ -16,6 +16,7 @@ import { API } from "../../../../constants/api";
 import { postMethod, requestWithToken } from "../../../../utils/fetchTool";
 import { showToast } from "../../../../slices/toast";
 import { IWorkspace } from "../../../../slices/workspace";
+import { fetchTodos, ITodo, setTodos } from "../../../../slices/todo";
 
 interface ITodoCreateProps {
   workspace: IWorkspace;
@@ -33,6 +34,16 @@ const TodoCreate: NextPage<ITodoCreateProps> = (props: ITodoCreateProps) => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleGetTodos = async () => {
+    dispatch(showLoadding())
+    await delayTime(500);
+
+    const data: any = await dispatch(fetchTodos(workspace.id))
+    const todoList: ITodo[] = data?.payload || []
+    dispatch(setTodos(todoList))
+    dispatch(hiddenLoading())
+  }
 
   const handleSubmit = async () => {
     dispatch(showLoadding())
@@ -56,6 +67,7 @@ const TodoCreate: NextPage<ITodoCreateProps> = (props: ITodoCreateProps) => {
         dispatch(hiddenLoading())
         if (res.code === 200) {
           setTitle('')
+          handleGetTodos();
           dispatch(showToast({
             message: "Create successful!!!",
             type: 'success'

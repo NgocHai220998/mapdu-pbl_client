@@ -1,6 +1,6 @@
 import { NextPage } from "next"
-import { useState } from "react";
 import { IWorkspace } from "../../../slices/workspace"
+import TodoCreate from "./AddNewTodo";
 import TodoItem from "./item";
 
 interface ITodoListProps {
@@ -10,21 +10,17 @@ interface ITodoListProps {
 const TodoList: NextPage<ITodoListProps> = (props: ITodoListProps) => {
   const { workspace } = props;
 
-  const [expanded, setExpanded] = useState<string | false>(false);
-
-  const handleChange =
-    (panel: string) => (event: any, isExpanded: boolean) => {
-      setExpanded(isExpanded ? panel : false);
-    };
-
   return (
     <>
       <div className="list-container">
-
+        <div style={{ marginBottom: '8px' }}>
+          <TodoCreate workspace={workspace}/>
+        </div>
         <TodoItem />
       </div>
       <style jsx>{`
         .list-container {
+          margin-top: 8px;
         }
       `}
       </style>

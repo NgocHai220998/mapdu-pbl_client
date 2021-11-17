@@ -37,7 +37,6 @@ const TodoCreate: NextPage<ITodoCreateProps> = (props: ITodoCreateProps) => {
 
   const handleGetTodos = async () => {
     dispatch(showLoadding())
-    await delayTime(500);
 
     const data: any = await dispatch(fetchTodos(workspace.id))
     const todoList: ITodo[] = data?.payload || []

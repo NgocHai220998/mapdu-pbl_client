@@ -11,7 +11,6 @@ import {
 import { NextPage } from "next"
 import { useState } from "react";
 import { fetchTodos, ITodo, setTodos } from "../../../../slices/todo";
-import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import ModeEditIcon from '@mui/icons-material/ModeEdit';
 import { ACTION_TYPES } from "./config";
 import MDEditor from '@uiw/react-md-editor';
@@ -22,6 +21,7 @@ import { API } from "../../../../constants/api";
 import { putMethod, requestWithToken } from "../../../../utils/fetchTool";
 import { IWorkspace } from "../../../../slices/workspace";
 import { showToast } from "../../../../slices/toast";
+import DeleteTodo from "../DeleteTodo";
 
 interface ITodoItemProps {
   todo: ITodo;
@@ -149,7 +149,8 @@ const TodoItem: NextPage<ITodoItemProps> = (props: ITodoItemProps) => {
             onDelete={() => {
               setExpanded(false);
               setActionType(ACTION_TYPES.DETAIL);
-            }} 
+            }}
+            className="el-hover"
           />
         </Stack>
         <Stack className="item-container__actions" spacing={1} direction="row">
@@ -166,20 +167,11 @@ const TodoItem: NextPage<ITodoItemProps> = (props: ITodoItemProps) => {
                     setExpanded('panel1');
                     setActionType(ACTION_TYPES.EDIT);
                   }}
+                  className="el-hover"
                 >
                   <ModeEditIcon fontSize="small" />
                 </Button>
-                <Button
-                  size="small"
-                  variant="contained"
-                  color="error"
-                  style={{ minWidth: '32px' }}
-                  onClick={(e: any) => {
-                    e.stopPropagation();
-                  }}
-                >
-                  <DeleteOutlineIcon fontSize="small" />
-                </Button>
+                <DeleteTodo todo={todo} />
               </>
             ) : (
               <Button
@@ -191,6 +183,7 @@ const TodoItem: NextPage<ITodoItemProps> = (props: ITodoItemProps) => {
                   e.stopPropagation();
                   handleEdit();
                 }}
+                className="el-hover"
               >
                 save
               </Button>

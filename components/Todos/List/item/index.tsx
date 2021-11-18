@@ -6,7 +6,8 @@ import {
   Stack,
   Button,
   TextField,
-  Chip
+  Chip,
+  Menu
 } from "@mui/material";
 import { NextPage } from "next"
 import { useState } from "react";
@@ -22,6 +23,8 @@ import { putMethod, requestWithToken } from "../../../../utils/fetchTool";
 import { IWorkspace } from "../../../../slices/workspace";
 import { showToast } from "../../../../slices/toast";
 import DeleteTodo from "../DeleteTodo";
+import Status from "./components/status";
+import Priority from "./components/priority";
 
 interface ITodoItemProps {
   todo: ITodo;
@@ -52,7 +55,7 @@ const TodoItem: NextPage<ITodoItemProps> = (props: ITodoItemProps) => {
       setExpanded(isExpanded ? panel : false);
     };
 
-    const handleEdit = async () => {
+    const handleEdit = async (status = todo.status, priority = todo.priority) => {
       dispatch(showLoadding())
       await delayTime(500)
 
@@ -63,8 +66,8 @@ const TodoItem: NextPage<ITodoItemProps> = (props: ITodoItemProps) => {
           todo: {
             title: title,
             description: description,
-            priority: todo.priority,
-            status: todo.status
+            priority: priority,
+            status: status
           }
         })
       }).then(response => response.json())
@@ -105,7 +108,9 @@ const TodoItem: NextPage<ITodoItemProps> = (props: ITodoItemProps) => {
             {
               actionType === ACTION_TYPES.DETAIL ? (
                 <Typography sx={{ width: '100%', flexShrink: 0 }}>
-                  {todo.title}
+                  {todo.title} 
+                  <Status todo={todo} handleUpdate={handleEdit} />
+                  <Priority todo={todo} handleUpdate={handleEdit} />
                 </Typography>
               ) : (
                 <TextField

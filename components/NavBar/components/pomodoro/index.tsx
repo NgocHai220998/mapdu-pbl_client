@@ -12,6 +12,7 @@ const PomodoroTimer: NextPage = () => {
   const [pomoSelected, setPomoSelected] = useState<string>(POMODORO_OPTIONS.POMODORO)
   const [time, setTime] = useState<number>(TIMER_VALUES.pomo * SECOND_TIME);
   const [isStarted, setIsStarted] = useState<boolean>(false);
+  const [isDonePomodoro, setIsDonePomodoro] = useState<boolean>(false);
   const [machineTime, setMachineTime] = useState<any>(null);
 
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -38,14 +39,15 @@ const PomodoroTimer: NextPage = () => {
   const handleSelectPomo = (value: string) => {
     setPomoSelected(value);
     setTime(getTimeByTimerSelected(value, timer) * SECOND_TIME)
-    handleStopPomodoro()
+    handleStopPomodoro();
+    setIsDonePomodoro(false);
   }
 
   const runPomodoro = () => {
     setIsStarted(true);
+    setIsDonePomodoro(false);
     setMachineTime(setInterval(() => {
       setTime((value: number) => {
-        console.log(value)
         return value - 1;
       });
     }, 1000))
@@ -62,6 +64,7 @@ const PomodoroTimer: NextPage = () => {
     setTimer(timerValues);
     setTime(timerValues.pomo * SECOND_TIME);
     handleStopPomodoro();
+    setIsDonePomodoro(false);
   }
 
   useEffect(() => {
@@ -70,9 +73,16 @@ const PomodoroTimer: NextPage = () => {
     setTime(timerValues.pomo * SECOND_TIME);
   }, []);
 
+  useEffect(() => {
+    if (time == 0) {
+      handleResetPomodoro();
+      setIsDonePomodoro(true);
+    };
+  }, [time])
+
   return (
     <>
-      <div className="pomodoro-container background">
+      <div className={`pomodoro-container background ${isDonePomodoro ? 'is-done-pomodoro' : ''}`}>
         <div className="pomodoro-header">
           <div className="pomodoro-timer">
             <span>{convertTime(time)}</span>
@@ -145,6 +155,10 @@ const PomodoroTimer: NextPage = () => {
           margin-right: 12px;
           border-radius: 5px;
           padding: 8px 16px;
+
+          &.is-done-pomodoro {
+            animation: isDonePomodoro 1s linear infinite;
+          }
         }
         .pomodoro {
           &-header {
@@ -192,6 +206,21 @@ const PomodoroTimer: NextPage = () => {
         .pomo-selected {
           border-bottom: 3px solid white;
           padding-bottom: 4px;
+        }
+
+        @keyframes isDonePomodoro {
+          100% {
+            background: #2E94E3;
+            box-shadow: 0 0 30px #2E94E3;
+          }
+          70% {
+            background: #2E94E3;
+            box-shadow: 0 0 30px #2E94E3;
+          }
+          0% {
+            background: #cb2020;
+            box-shadow: 0 0 30px #cb2020;
+          }
         }
       `}
       </style>

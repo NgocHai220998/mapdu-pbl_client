@@ -15,4 +15,8 @@ export const API = {
   CREATE_WORKSPACE: `${END_POINT}/api/work_spaces`,
   UPDATE_WORKSPACE: (id: number) => `${END_POINT}/api/work_spaces/${id}`,
   DELETE_WORKSPACE_BY_ID: (id: number) => `${END_POINT}/api/work_spaces/${id}`,
+  CREATE_TODO: `${END_POINT}/api/todos`,
+  GET_TODOS_BY_WORKSPACE_ID: (id: number) => `${END_POINT}/api/todos?work_space_id=${id}`,
+  UPDATE_TODO_BY_ID: (id: number) => `${END_POINT}/api/todos/${id}`,
+  DELETE_TODO_BY_ID: (id: number) => `${END_POINT}/api/todos/${id}`,
 }

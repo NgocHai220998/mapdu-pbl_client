@@ -20,7 +20,7 @@ const Banner: NextPage = () => {
           width: 100%;
           height: 100%;
           background-color: #f2d184;
-          padding: 64px 16px;
+          padding: 32px 16px;
           border-radius: 8px 0 0 8px;
 
           &-image {

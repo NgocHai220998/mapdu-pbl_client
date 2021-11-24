@@ -6,7 +6,11 @@ const Logo = () => {
             <feGaussianBlur stdDeviation="100 0"></feGaussianBlur>
         </filter>
       </svg>
-      <span className="logo-text" filter-content="M">MyWork</span>
+      <h1 className="glitch logo-text" filter-content="M">
+        <span aria-hidden="true">MYWORK</span>
+            MYWORK
+        <span aria-hidden="true">MYWORK</span>
+      </h1>
       <style jsx global>{`
         .logo {
           color: #212121;

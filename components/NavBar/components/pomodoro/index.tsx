@@ -61,16 +61,16 @@ const PomodoroTimer: NextPage = () => {
 
   const handleResetPomodoro = () => {
     const timerValues: ITimerValue = getItem(KEY_TYPES.TIMER_SETTING)
-    setTimer(timerValues);
-    setTime(timerValues.pomo * SECOND_TIME);
+    setTimer(timerValues || TIMER_VALUES);
+    setTime(timerValues?.pomo ? timerValues?.pomo * SECOND_TIME : TIMER_VALUES.pomo * SECOND_TIME);
     handleStopPomodoro();
     setIsDonePomodoro(false);
   }
 
   useEffect(() => {
     const timerValues: ITimerValue = getItem(KEY_TYPES.TIMER_SETTING)
-    setTimer(timerValues);
-    setTime(timerValues.pomo * SECOND_TIME);
+    setTimer(timerValues || TIMER_VALUES);
+    setTime(timerValues?.pomo ? timerValues?.pomo * SECOND_TIME : TIMER_VALUES.pomo * SECOND_TIME);
   }, []);
 
   useEffect(() => {
@@ -88,7 +88,7 @@ const PomodoroTimer: NextPage = () => {
             <span>{convertTime(time)}</span>
           </div>
           <div className="pomodoro-btn-start">
-            <Chip 
+            <Chip
               className="el-hover"
               style={{
                 color: 'white',

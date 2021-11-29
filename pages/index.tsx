@@ -15,12 +15,23 @@ const useStyles = makeStyles({
 const Home: NextPage = () => {
   const classes = useStyles();
   return (
-    <Grid className={classes.root} container spacing={4}>
+    <Grid className={classes.root} container spacing={3}>
       <Grid item xs={3}>
         <Workspace />
       </Grid>
-      <Grid item xs={9}>
+      <Grid item xs={6.5}>
         <Todos />
+      </Grid>
+      <Grid item xs={2.5}>
+        <div>
+          <iframe
+            src="https://open.spotify.com/embed/album/1DFixLWuPkv3KT3TnV35m3"
+            width="100%" height="330"
+            frameBorder="0"
+            allowTransparency="true"
+            allow="encrypted-media"
+          ></iframe>
+        </div>
       </Grid>
     </Grid>
   )

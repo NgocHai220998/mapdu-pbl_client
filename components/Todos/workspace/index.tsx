@@ -42,9 +42,9 @@ const TodosWorkspace: NextPage<IWorkspaceProps> = (props: IWorkspaceProps) => {
             size="small"
             color="secondary"
             className="el-hover"
-            style={{padding: 0, minWidth: '32px'}}
+            style={{ padding: 0, minWidth: '32px' }}
           >
-           <MoreHorizIcon />
+            <MoreHorizIcon />
           </Button>
           <Menu
             id="basic-menu"
@@ -56,7 +56,7 @@ const TodosWorkspace: NextPage<IWorkspaceProps> = (props: IWorkspaceProps) => {
             }}
           >
             <MenuDetail handleCloseMenu={handleClose} workspace={workspace} />
-            <MenuEdit handleCloseMenu={handleClose} workspace={workspace}/>
+            <MenuEdit handleCloseMenu={handleClose} workspace={workspace} />
             <MenuDelete handleCloseMenu={handleClose} workspace={workspace} />
           </Menu>
         </div>
@@ -71,7 +71,7 @@ const TodosWorkspace: NextPage<IWorkspaceProps> = (props: IWorkspaceProps) => {
           .workspace-name {
             span {
               display: inline-block;
-              max-width: 768px;
+              max-width: 500px;
               font-size: 28px;
               color: white;
               font-family: "Comic Sans MS", "Comic Sans", cursive;

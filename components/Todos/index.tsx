@@ -14,14 +14,14 @@ const Todos: NextPage = () => {
 
   useEffect(() => {
     const workspaceID: number = router.query?.workspace_id || workspaces[0]?.id
-    setWorkspace(getWorkspaceByID(workspaces, workspaceID)) 
+    setWorkspace(getWorkspaceByID(workspaces, workspaceID))
   }, [router.query.workspace_id, workspaces])
 
   return (
     <>
       <div className="todos-container background">
         <TodosWorkspace workspace={workspace} />
-        <TodoList workspace={workspace}/>
+        <TodoList workspace={workspace} />
       </div>
       <style jsx global>{`
         .todos-container {
